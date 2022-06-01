@@ -1,0 +1,45 @@
+{ 
+    "_id" : ObjectId("60ab5da2d1bc0b9a229484c1"), 
+    "_etag" : ObjectId("60ab5da20776a2040449ff69"), 
+    "Cap" : NumberInt(0), 
+    "DonViCha" : null, 
+    "KichHoat" : true, 
+    "Ma" : "DV_TEST", 
+    "STT" : NumberInt(9999), 
+    "Ten" : "Đơn vị test", 
+    "code" : "60ab5da187e1e81670545266", 
+    "codeTree" : "DV_TEST", 
+    "createdAt" : NumberLong(1621843361849), 
+    "createdBy" : "su-root", 
+    "isActive" : true
+}
+{ 
+    "_id" : ObjectId("629080bc940a691d9d7f4b42"), 
+    "_etag" : ObjectId("629080bcf19a680a8cc23e4e"), 
+    "Cap" : NumberInt(0), 
+    "DonViCha" : null, 
+    "KichHoat" : true, 
+    "Ma" : "DON_VI_DEMO", 
+    "STT" : NumberInt(9999), 
+    "Ten" : "Đơn vị demo", 
+    "code" : "629080bc10f3fa4934bd0c37", 
+    "codeTree" : "DON_VI_DEMO", 
+    "createdAt" : NumberLong(1653637308897), 
+    "createdBy" : "su-root", 
+    "isActive" : true
+}
+{ 
+    "_id" : ObjectId("629080c5940a691d9d7f4b50"), 
+    "_etag" : ObjectId("629080c5f19a680a8cc23e51"), 
+    "Cap" : NumberInt(0), 
+    "DonViCha" : null, 
+    "Ma" : "DON_VI_DEMO2", 
+    "STT" : NumberInt(9999), 
+    "Ten" : "Đơn vị demo 2", 
+    "code" : "629080c510f3fa4934bd0c38", 
+    "codeTree" : "DON_VI_DEMO2", 
+    "createdAt" : NumberLong(1653637317383), 
+    "createdBy" : "su-root", 
+    "isActive" : true, 
+    "KichHoat" : true
+}

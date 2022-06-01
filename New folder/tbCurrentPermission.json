@@ -1,0 +1,286 @@
+{ 
+    "_id" : ObjectId("60ab70d0d1bc0b9a2295134c"), 
+    "NguoiDung" : {
+        "account" : "luongld"
+    }, 
+    "Quyen" : {
+        "Ma" : [
+            "TEST"
+        ], 
+        "ChucNang" : [
+            {
+                "Ma" : "/tbDonVi", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbUsers", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbLogApi", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbDanhMucUngDung", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbNhomQuyen", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbNhomQuyenNguoiDung", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbMenu", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbCurrentPermission", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/auth", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/users", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/general", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/media", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }
+        ]
+    }, 
+    "_etag" : ObjectId("619b02e00776a2040dbdb9eb")
+}
+{ 
+    "_id" : ObjectId("628e40d6940a691d9d7f046c"), 
+    "_etag" : ObjectId("628e40d60c42d0442850b821"), 
+    "NguoiDung" : {
+        "account" : "testsso@quangnam.gov.vn"
+    }, 
+    "Quyen" : {
+        "Ma" : [
+
+        ], 
+        "ChucNang" : [
+
+        ]
+    }
+}
+{ 
+    "_id" : ObjectId("628e4137940a691d9d7f04d3"), 
+    "NguoiDung" : {
+        "account" : "admin"
+    }, 
+    "Quyen" : {
+        "Ma" : [
+            "TEST"
+        ], 
+        "ChucNang" : [
+            {
+                "Ma" : "/tbCauHoiTraLoi", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbDonVi", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbUsers", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbLogApi", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbLogPublic", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbDanhMucUngDung", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbNhomQuyen", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbNhomQuyenNguoiDung", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbMenu", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbCurrentPermission", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbKetNoi", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/auth", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/users", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/general", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/media", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }
+        ]
+    }, 
+    "_etag" : ObjectId("62958f16f19a6846fc90bd0d")
+}

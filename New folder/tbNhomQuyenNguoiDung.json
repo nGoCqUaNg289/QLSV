@@ -1,0 +1,185 @@
+{ 
+    "_id" : ObjectId("62904e02940a691d9d7f3a18"), 
+    "_etag" : ObjectId("62904e02f19a680a8cc2347d"), 
+    "NguoiDung" : {
+        "_id" : ObjectId("628e4137940a691d9d7f04c9"), 
+        "_etag" : ObjectId("628e41370c42d0442850b824"), 
+        "KichHoat" : true, 
+        "account" : "admin", 
+        "code" : "628e41377d28ce0bf04aa5c9", 
+        "createdAt" : NumberLong(1653489975302), 
+        "createdBy" : "admin", 
+        "isActive" : true, 
+        "name" : "admin"
+    }, 
+    "NhomQuyen" : {
+        "_id" : ObjectId("60ab70c1d1bc0b9a2295128c"), 
+        "_etag" : ObjectId("62904dedf19a680a8cc2345e"), 
+        "KichHoat" : true, 
+        "Ma" : "TEST", 
+        "QuyenChucNang" : [
+            {
+                "Ma" : "/tbCauHoiTraLoi", 
+                "Ten" : "QL Câu hỏi trả lời", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbDonVi", 
+                "Ten" : "QL Đơn vị", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbUsers", 
+                "Ten" : "QL Người dùng", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbLogApi", 
+                "Ten" : "QL LogAPI", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbLogPublic", 
+                "Ten" : "QL Log Public", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbDanhMucUngDung", 
+                "Ten" : "QL Dữ liệu dùng chung", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbNhomQuyen", 
+                "Ten" : "QL Nhóm quyền", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbNhomQuyenNguoiDung", 
+                "Ten" : "QL Nhóm quyền người dùng", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbMenu", 
+                "Ten" : "QL Menu", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbCurrentPermission", 
+                "Ten" : "QL Quyền sử dụng", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/tbKetNoi", 
+                "Ten" : "QL Cấu hình kết nối", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/auth", 
+                "Ten" : "Xác thực", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/users", 
+                "Ten" : "Tài khoản", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/general", 
+                "Ten" : "Thông tin chung", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }, 
+            {
+                "Ma" : "/media", 
+                "Ten" : "Media (hình ảnh, file, video)", 
+                "HanhDong" : {
+                    "POST" : true, 
+                    "GET" : true, 
+                    "PATCH" : true, 
+                    "DELETE" : true
+                }
+            }
+        ], 
+        "STT" : NumberInt(9999), 
+        "Ten" : "QUẢN TRỊ", 
+        "code" : "60ab70c1a44d234f887c7df9", 
+        "createdAt" : NumberLong(1621848257400), 
+        "createdBy" : "su-root", 
+        "isActive" : true, 
+        "modifiedAt" : NumberLong(1653961965180), 
+        "modifiedBy" : "su-root"
+    }, 
+    "code" : "62904e0220cfe045c02cc0ca", 
+    "createdAt" : NumberLong(1653624322041), 
+    "createdBy" : "su-root", 
+    "isActive" : true
+}

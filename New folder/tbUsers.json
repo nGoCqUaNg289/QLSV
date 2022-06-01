@@ -1,0 +1,11 @@
+{ 
+    "_id" : ObjectId("628e4137940a691d9d7f04c9"), 
+    "_etag" : ObjectId("628e41370c42d0442850b824"), 
+    "KichHoat" : true, 
+    "account" : "admin", 
+    "code" : "628e41377d28ce0bf04aa5c9", 
+    "createdAt" : NumberLong(1653489975302), 
+    "createdBy" : "admin", 
+    "isActive" : true, 
+    "name" : "admin"
+}
