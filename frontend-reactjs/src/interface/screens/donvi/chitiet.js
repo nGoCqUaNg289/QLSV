@@ -7,7 +7,8 @@ import * as CONSTANTS from 'common/ulti/constants';
 import { confirmAlert } from 'react-confirm-alert';
 import * as cmFunction from 'common/ulti/commonFunction';
 import * as tbDonVi from 'controller/services/tbDonViServices';
-import * as tbDanhMucUngDung from 'controller/services/tbDanhMucUngDungServices'
+import * as tbUsers from 'controller/services/tbUsersServices';
+import * as tbChuyenNganh from 'controller/services/tbChuyenNganhServices'
 import { fetchToastNotify } from '../../../controller/redux/app-reducer';
 
 class ChiTiet extends Component {
@@ -18,7 +19,11 @@ class ChiTiet extends Component {
       error: false,
       form: {},
       donvi: [],
+      giangvien: [],
+      chuyennganh: [],
+      chuyennganhSelected: null,
       donviSelected: null,
+      giangvienSelected: null,
       searchTimeout: null,
       check: false
     };
@@ -70,6 +75,7 @@ class ChiTiet extends Component {
       filter.count = true
       filter.sort_by = 'STT'
       filter.filter = JSON.stringify({ Ten: cmFunction.regexText(inputValue), KichHoat: true });
+      // filter.filter.CapBac.Ten = 'Giảng viên'
       filter = new URLSearchParams(filter).toString();
       let dsDonVi = await tbDonVi.getAll(filter);
       dsDonVi = dsDonVi && dsDonVi._embedded ? dsDonVi._embedded : [];
@@ -81,6 +87,47 @@ class ChiTiet extends Component {
       this.forceUpdate();
       callback(donvi);
     }, 500);
+  };
+
+  _handleDonViChange = (sel) => {
+    this.state.donviSelected = sel;
+    this.forceUpdate();
+  };
+
+  _handleLoadGVOptions = (inputValue, callback) => {
+    clearTimeout(this.state.searchTimeout);
+    this.state.searchTimeout = setTimeout(async () => {
+      let filter = {};
+      filter.page = 1;
+      filter.pagesize = 1000;
+      filter.count = true
+      filter.sort_by = 'STT'
+      // filter.filter = JSON.stringify({ Ten: cmFunction.regexText(inputValue), KichHoat: true });
+      filter = new URLSearchParams(filter).toString();
+      let dsGiangVien = await tbUsers.getAll(filter);
+      dsGiangVien = dsGiangVien && dsGiangVien._embedded ? dsGiangVien._embedded : [];
+      dsGiangVien.forEach(item => {
+        // if()
+        if (item.CapBac.Ten == "Giảng viên") {
+          let ListItem = [];
+          ListItem.push(item);
+          this.state.giangvien = ListItem;
+        }
+
+      });
+      let id = this.props.match.params.id;
+      let find = this.state.giangvien.find(ele => ele._id.$oid == id);
+      find = find ? [find] : [];
+      let giangvien = cmFunction.convertSelectOptions(this.state.giangvien, '_id.$oid', 'name', find);
+      this.state.giangvien = giangvien;
+      this.forceUpdate();
+      callback(giangvien);
+    }, 500);
+  };
+
+  _handleGiangVienChange = (sel) => {
+    this.state.giangvienSelected = sel;
+    this.forceUpdate();
   };
 
   _handleCheckMaDV = async () => {
@@ -96,17 +143,13 @@ class ChiTiet extends Component {
     return data._returned;
   }
 
-  _handleDonViChange = (sel) => {
-    this.state.donviSelected = sel;
-    this.forceUpdate();
-  };
+
 
   //ACTION
   _handleConfirm = (_type = 0, _action, _stay = false) => {
     confirmAlert({
       title: `${!_type ? 'Sửa' : _type < 0 ? 'Xóa' : 'Thêm'} dữ liệu`,
-      message: `Xác nhận ${
-        !_type ? 'sửa' : _type < 0 ? 'xóa' : 'thêm'
+      message: `Xác nhận ${!_type ? 'sửa' : _type < 0 ? 'xóa' : 'thêm'
         } dữ liệu`,
       buttons: [
         {
@@ -156,11 +199,13 @@ class ChiTiet extends Component {
   };
 
   _handleUpdateInfo = async (stay) => {
-    let { form, donviSelected, isInsert } = this.state;
+    let { form, donviSelected, isInsert, giangvienSelected } = this.state;
     let axiosReq = form;
+
     axiosReq.STT = Number(axiosReq.STT || 9999);
     axiosReq.DonViCha = null;
     axiosReq.Cap = 0;
+    axiosReq.ChuNhiem = giangvienSelected.name;
     if (donviSelected) {
       let dvTmp = cmFunction.clone(donviSelected)
       delete dvTmp.DonViCha
@@ -169,7 +214,7 @@ class ChiTiet extends Component {
       delete axiosReq.DonViCha.value;
       delete axiosReq.DonViCha.label;
     }
-
+    console.log(axiosReq);
     let axiosRes;
     if (isInsert) {
       axiosRes = await tbDonVi.create(axiosReq);
@@ -191,7 +236,7 @@ class ChiTiet extends Component {
   };
 
   render() {
-    let { isInsert, form, error, donviSelected } = this.state;
+    let { isInsert, form, error, donviSelected, giangvienSelected } = this.state;
     if (error) return <Page404 />;
     try {
       return (
@@ -199,14 +244,14 @@ class ChiTiet extends Component {
           <BreadCrumbs
             title={'Chi tiết'}
             route={[
-              { label: 'Quản lý đơn vị', value: '/quan-ly/don-vi' },
-              { label: 'Thông tin đơn vị', value: '/quan-ly/don-vi/:id' },
+              { label: 'Quản lý lớp học', value: '/quan-ly/don-vi' },
+              { label: 'Thông tin lớp học', value: '/quan-ly/don-vi/:id' },
             ]}
           />
           <div className="portlet-title">
             <div className="caption">
               <i className="fas fa-grip-vertical" />
-              Thông tin đơn vị
+              Thông tin lớp
             </div>
             <div className="action">
               <button
@@ -291,8 +336,8 @@ class ChiTiet extends Component {
                       defaultValue={form.Ten || ''}
                       type="text"
                       id="Ten"
-                      label="Tên đơn vị"
-                      placeholder="Nhập tên đơn vị"
+                      label="Tên lớp"
+                      placeholder="Nhập tên lớp học"
                     />
                     <FormInput
                       parentClass="col-md-6"
@@ -305,23 +350,22 @@ class ChiTiet extends Component {
                       defaultValue={form.Ma || ''}
                       type="text"
                       id="Ma"
-                      label="Mã đơn vị"
-                    // _handleCheck={this._handleCheckMaDV} 
+                      label="Khóa học"
                     />
                   </FormWrapper>
                   <FormWrapper>
                     <FormInput
-                      loadOptions={this._handleLoadOptions}
-                      onChange={this._handleDonViChange}
+                      loadOptions={this._handleLoadGVOptions}
+                      onChange={this._handleGiangVienChange}
                       required={false}
-                      defaultValue={donviSelected}
+                      defaultValue={giangvienSelected}
                       isDisabled={false}
                       isClearable={true}
                       isSearchable={true}
                       defaultOptions={true}
                       type="select"
-                      label="Trực thuộc"
-                      placeholder="Chọn đơn vị trực thuộc ..."
+                      label="Giảng viên chủ nhiệm"
+                      placeholder="Chọn giảng viên ..."
                     />
                   </FormWrapper>
                   <FormWrapper>
@@ -333,29 +377,12 @@ class ChiTiet extends Component {
                       defaultValue={form.DiaChi || ''}
                       type="text"
                       id="DiaChi"
-                      label="Địa chỉ"
-                      placeholder="Nhập địa chỉ"
+                      label="Chuyên ngành"
+                      placeholder="Nhập chuyên ngành đào tạo"
                     />
                   </FormWrapper>
-                  {/*<FormWrapper>
+                  {/* <FormWrapper>
                     <FormInput
-                      onChange={this._handleChangeElement}
-                      defaultValue={form.DiaChiBanDo}
-                      type="gmapaddress"
-                      id="DiaChiBanDo"
-                      label="Địa chỉ bản đồ"
-                      placeholder="Nhập địa chỉ bản đồ"
-                    />
-                  </FormWrapper>*/}
-                  {/* <div className="form-group form-row form-custom form-no-spacing">
-                    <label className="col-md-3 mb-0">Địa chỉ bản đồ</label>
-                    <GmapAddress className='form-control' onChange={this._handleChangeElement} value={form.DiaChiBanDo} id="DiaChiBanDo" placeholder="Địa chỉ bản đồ" />
-                  </div> */}
-                  <FormWrapper>
-                    <FormInput
-                      parentClass="col-md-6"
-                      labelClass="col-md-6"
-                      inputClass="col-md-6"
                       required={false}
                       disabled={false}
                       readOnly={false}
@@ -368,22 +395,7 @@ class ChiTiet extends Component {
                       errorLabel="SĐT không hợp lệ"
                       placeholder="Nhập SĐT liên hệ"
                     />
-                    <FormInput
-                      parentClass="col-md-6"
-                      labelClass="col-md-6"
-                      inputClass="col-md-6"
-                      required={false}
-                      disabled={false}
-                      readOnly={false}
-                      pattern=""
-                      onChange={this._handleChangeElement}
-                      defaultValue={form.STT || ''}
-                      type="number"
-                      id="STT"
-                      label="STT"
-                      placeholder="Nhập số thứ tự"
-                    />
-                  </FormWrapper>
+                  </FormWrapper> */}
                   <FormWrapper>
                     <FormInput
                       type="textarea"

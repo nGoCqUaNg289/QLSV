@@ -196,10 +196,10 @@ class DanhSach extends Component {
       return (
         <React.Fragment>
           <div className="main portlet fade-in">
-            <BreadCrumbs title={"Danh sách đơn vị"} route={[{ label: 'Quản lý đơn vị', value: '/don-vi' }]} />
+            <BreadCrumbs title={"Danh sách lớp"} route={[{ label: 'Quản lý lớp học', value: '/don-vi' }]} />
             <div className="portlet-title">
               <div className="caption">
-                <i className="fas fa-grip-vertical" />Danh sách đơn vị
+                <i className="fas fa-grip-vertical" />Danh sách lớp học
               </div>
               <div className="action">
                 {/* <button onClick={this._handleSearchToggle} className="btn btn-sm btn-outline-info border-radius" title="Tìm kiếm">
@@ -230,11 +230,10 @@ class DanhSach extends Component {
                       <tr>
                         <th className='td-checkbox'><input type="checkbox" id='cbCheckAll' checked={cbCheckAll} onChange={this._handleCheckAll} /></th>
                         <th>STT</th>
-                        <th>Tên đơn vị</th>
-                        {/* <th>Mã</th> */}
-                        <th>Khối tổ chức</th>
-                        <th>SĐT liên hệ</th>
-                        <th>Địa chỉ</th>
+                        <th>Tên lớp</th>
+                        <th>Ngành học</th>
+                        <th>Giảng viên chủ nhiệm</th>
+                        {/* <th>Tổng số học sinh</th> */}
                         <th>Trạng thái</th>
                         <th>Hành động</th>
                       </tr>
@@ -247,12 +246,23 @@ class DanhSach extends Component {
                           </td>
                           <td className='text-center'>{index + 1}</td>
                           <td>{item.Ten}</td>
-                          {/* <td>{item.Ma}</td> */}
-                          <td>{item.DonViCha ? item.DonViCha.Ten : ""}</td>
-                          <td>{item.SoDienThoai}</td>
+                          {/* <td>{item.DonViCha ? item.DonViCha.Ten : ""}</td> */}
                           <td>{item.DiaChi}</td>
+                          <td>{item.ChuNhiem}</td>
+                          {/* <td></td> */}
                           <td>{item.KichHoat ? 'Kích hoạt' : ' '}</td>
                           <td>
+                            <Link
+                              to={{
+                                pathname:
+                                  "/quan-ly/don-vi/danhsachsv/" + item._id.$oid || item._id,
+                                state: { isReadOnly: true },
+                              }}
+                              title="Xem dữ liệu"
+                              className="btn btn-sm btn-outline-info border-radius mr-1"
+                            >
+                              <i className="fas fa-eye" />
+                            </Link>
                             <Link to={'/quan-ly/don-vi/' + item._id.$oid || item._id} title="Chi tiết" className="btn btn-sm btn-outline-info border-radius"><i className="fas fa-pencil-alt" /></Link>
                             <button onClick={() => this._handleConfirmDelete(false, item._id.$oid || item._id)} title="Xóa" className="btn btn-sm btn-outline-danger border-radius">
                               <i className="fas fa-trash" />

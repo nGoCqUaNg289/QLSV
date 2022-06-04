@@ -9,6 +9,7 @@ import AsyncSelect from 'react-select/async';
 import * as cmFunction from 'common/ulti/commonFunction'
 import * as tbUsers from 'controller/services/tbUsersServices'
 import * as tbDonVi from 'controller/services/tbDonViServices'
+import * as tbCapBac from 'controller/services/tbCapBacServices'
 import { fetchToastNotify } from "../../../controller/redux/app-reducer";
 
 class ChiTiet extends Component {
@@ -19,7 +20,11 @@ class ChiTiet extends Component {
       error: false,
       form: {},
       donvi: [],
-      donviSelected: null
+      donviSelected: null,
+      capbac: [],
+      capbacSelected: null,
+      lop: [],
+      lopSelected: null,
     }
   }
 
@@ -82,12 +87,12 @@ class ChiTiet extends Component {
       filter.count = true
       filter.filter = JSON.stringify({ Ten: cmFunction.regexText(inputValue), KichHoat: true });
       filter = new URLSearchParams(filter).toString()
-      let dsDonVi = await tbDonVi.getAll(filter)
-      dsDonVi = (dsDonVi && dsDonVi._embedded ? dsDonVi._embedded : [])
-      let donvi = cmFunction.convertSelectOptions(dsDonVi, '_id.$oid', 'Ten')
-      this.state.donvi = donvi
+      let dsCapBac = await tbCapBac.getAll(filter)
+      dsCapBac = (dsCapBac && dsCapBac._embedded ? dsCapBac._embedded : [])
+      let capbac = cmFunction.convertSelectOptions(dsCapBac, '_id.$oid', 'Ten')
+      this.state.capbac = capbac
 
-      this.state.donvi.sort(function (a, b) {
+      this.state.capbac.sort(function (a, b) {
         if (a.Cap != b.Cap) {
           return a.Cap - b.Cap;
         }
@@ -96,12 +101,44 @@ class ChiTiet extends Component {
         }
       })
       this.forceUpdate()
-      callback(donvi);
+      callback(capbac);
     }, 500);
   };
 
   _handleDonViChange = (sel) => {
-    this.state.donviSelected = sel
+    this.state.capbacSelected = sel
+    this.forceUpdate()
+  }
+
+  _handleLoadLopOptions = (inputValue, callback) => {
+    clearTimeout(this.state.searchLopTimeout);
+    this.state.searchLopTimeout = setTimeout(async () => {
+      let filter = {}
+      filter.page = 1
+      filter.pagesize = 1000
+      filter.count = true
+      // filter.filter = JSON.stringify({ Ten: cmFunction.regexText(inputValue), KichHoat: true });
+      filter = new URLSearchParams(filter).toString()
+      let dsLopHoc = await tbDonVi.getAll(filter)
+      dsLopHoc = (dsLopHoc && dsLopHoc._embedded ? dsLopHoc._embedded : [])
+      let lop = cmFunction.convertSelectOptions(dsLopHoc, '_id.$oid', 'Ten')
+      this.state.lop = lop
+
+      this.state.lop.sort(function (a, b) {
+        if (a.Cap != b.Cap) {
+          return a.Cap - b.Cap;
+        }
+        else {
+          return a.STT - b.STT;
+        }
+      })
+      this.forceUpdate()
+      callback(lop);
+    }, 500);
+  };
+
+  _handleLopChange = (sel) => {
+    this.state.lopSelected = sel
     this.forceUpdate()
   }
 
@@ -177,15 +214,28 @@ class ChiTiet extends Component {
   }
 
   _handleUpdateInfo = async (stay) => {
-    let { form, isInsert, donviSelected } = this.state
+    let { form, isInsert, donviSelected, capbacSelected, lopSelected } = this.state
     // form.KichHoat = false
     let axiosRes, axiosReq = cmFunction.clone(form)
-    axiosReq.DonVi = null
-    if (donviSelected) {
-      axiosReq.DonVi = cmFunction.clone(donviSelected)
-      delete axiosReq.DonVi.value
-      delete axiosReq.DonVi.label
+
+    // console.log(axiosReq);
+
+    axiosReq.CapBac = null
+    if (capbacSelected) {
+      axiosReq.CapBac = capbacSelected
     }
+
+    axiosReq.Lop = null
+    if (lopSelected) {
+      axiosReq.Lop = lopSelected
+    }
+
+    // axiosReq.DonVi = null
+    // if (donviSelected) {
+    //   axiosReq.DonVi = cmFunction.clone(donviSelected)
+    //   delete axiosReq.DonVi.value
+    //   delete axiosReq.DonVi.label
+    // }
 
     if (isInsert) {
       // axiosReq.KichHoat = false
@@ -237,7 +287,7 @@ class ChiTiet extends Component {
 
   render() {
     let { isInsert, form, error } = this.state
-    let { donvi, donviSelected } = this.state
+    let { donvi, donviSelected, capbacSelected, lopSelected } = this.state
     if (error)
       return <Page404 />
     try {
@@ -249,17 +299,14 @@ class ChiTiet extends Component {
           <div className="portlet-title">
             <div className="caption">
               <i className="fas fa-grip-vertical" />Thông tin người dùng
-              </div>
+            </div>
             <div className="action">
-              {isInsert && <button onClick={() => this._handleSaveAndAuthorization(true)} className="btn btn-sm btn-outline-primary border-radius">
-                <i className="fas fa-cogs" />Lưu và Phân quyền
-                </button>}
               <button onClick={() => this._handleSave(false)} className="btn btn-sm btn-outline-primary border-radius">
                 <i className="fas fa-save" />Lưu
-                </button>
+              </button>
               <button onClick={() => this._handleSave(true)} className="btn btn-sm btn-outline-primary border-radius">
                 <i className="far fa-save" />Lưu và tiếp tục
-                </button>
+              </button>
               <div className="btn btn-sm dropdown">
                 <button className="btn btn-sm btn-outline-primary border-radius dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i className="fas fa-share" />Khác
@@ -322,24 +369,16 @@ class ChiTiet extends Component {
                       defaultValue={form.pwd || ''} type="password" id="pwd" label="Mật khẩu" placeholder="Nhập mật khẩu" />
                   </FormWrapper>
                   <FormWrapper>
-                    {/* <label className="col-md-3 mb-0">Đơn vị<span className="required">*</span></label>
-                    <div className="col-md-9 pl-0 pr-0">
-                      <AsyncSelect
-                        className=""
-                        classNamePrefix="form-control"
-                        placeholder="Đơn vị ..."
-                        loadOptions={this._handleLoadOptions}
-                        // onInputChange={this._handleInputChange}
-                        onChange={this._handleDonViChange}
-                        value={donviSelected}
-                        isClearable
-                        isSearchable
-                        defaultOptions
-                      /> */}
+                    <FormInput
+                      loadOptions={this._handleLoadLopOptions} onChange={this._handleLopChange} required={true}
+                      defaultValue={lopSelected} isClearable={true} isSearchable={true} defaultOptions={true}
+                      type="select" label="Lớp" placeholder="Chọn lớp ..." />
+                  </FormWrapper>
+                  <FormWrapper>
                     <FormInput
                       loadOptions={this._handleLoadOptions} onChange={this._handleDonViChange} required={true}
-                      defaultValue={donviSelected} isClearable={true} isSearchable={true} defaultOptions={true}
-                      type="select" label="Đơn vị" placeholder="Chọn đơn vị ..." />
+                      defaultValue={capbacSelected} isClearable={true} isSearchable={true} defaultOptions={true}
+                      type="select" label="Cấp" placeholder="Chọn cấp ..." />
                   </FormWrapper>
                   <FormWrapper>
                     <FormInput parentClass="col-md-6" labelClass="col-md-6" inputClass="col-md-6"

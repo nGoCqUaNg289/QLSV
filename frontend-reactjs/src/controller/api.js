@@ -30,6 +30,13 @@ export const TB_DON_VI = '/tbDonVi'
 export const TB_DANH_MUC_UNG_DUNG = '/tbDanhMucUngDung'
 export const TB_LOG_API = '/tbLogApi'
 export const TB_CURRENT_PERMISSION = '/tbCurrentPermission'
+export const TB_GIANG_VIEN = '/tbGiangVien'
+export const TB_SINH_VIEN = '/tbSinhVien'
+export const TB_CAP_BAC = '/tbCapBac'
+export const TB_CHUYEN_NGANH = '/tbChuyenNganh'
+export const TB_BANG_DIEM = '/tbBangDiem'
+export const TB_MON_HOC = '/tbMonHoc'
+
 //QUAN TRI
 export const TB_NHOM_QUYEN = '/tbNhomQuyen'
 export const TB_NHOM_QUYEN_NGUOI_DUNG = '/tbNhomQuyenNguoiDung'

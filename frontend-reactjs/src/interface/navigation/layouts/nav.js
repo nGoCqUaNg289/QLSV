@@ -12,12 +12,25 @@ const MatKhau = loadable({ loader: () => import('interface/screens/canhan/matkha
 
 const DanhSachDonVi = loadable({ loader: () => import('interface/screens/donvi/danhsach'), loading: LoadingComponent });
 const ChiTietDonVi = loadable({ loader: () => import('interface/screens/donvi/chitiet'), loading: LoadingComponent });
+const DanhSachSinhVien = loadable({ loader: () => import('interface/screens/donvi/danhsachsv'), loading: LoadingComponent });
 
 const DanhSachNhomQuyen = loadable({ loader: () => import('interface/screens/nhomquyen/danhsach'), loading: LoadingComponent });
 const ChiTietNhomQuyen = loadable({ loader: () => import('interface/screens/nhomquyen/chitiet'), loading: LoadingComponent });
 
 const DanhSachNguoiDung = loadable({ loader: () => import('interface/screens/nguoidung/danhsach'), loading: LoadingComponent });
 const ChiTietNguoiDung = loadable({ loader: () => import('interface/screens/nguoidung/chitiet'), loading: LoadingComponent });
+
+const DanhSachMonHoc = loadable({ loader: () => import('interface/screens/monhoc/danhsach'), loading: LoadingComponent });
+const ChiTietMonHoc = loadable({ loader: () => import('interface/screens/monhoc/chitiet'), loading: LoadingComponent });
+
+const DanhSachChuyenNganh = loadable({ loader: () => import('interface/screens/chuyennganh/danhsach'), loading: LoadingComponent });
+const ChiTietChuyenNganh = loadable({ loader: () => import('interface/screens/chuyennganh/chitiet'), loading: LoadingComponent });
+
+const DanhSachCapBac = loadable({ loader: () => import('interface/screens/capbac/danhsach'), loading: LoadingComponent });
+const ChiTietCapBac = loadable({ loader: () => import('interface/screens/capbac/chitiet'), loading: LoadingComponent });
+
+const DanhSachBangDiem = loadable({ loader: () => import('interface/screens/bangdiem/danhsach'), loading: LoadingComponent });
+const ChiTietBangDiem = loadable({ loader: () => import('interface/screens/bangdiem/chitiet'), loading: LoadingComponent });
 
 const DanhSachMenu = loadable({ loader: () => import('interface/screens/menu/danhsach'), loading: LoadingComponent });
 const ChiTietMenu = loadable({ loader: () => import('interface/screens/menu/chitiet'), loading: LoadingComponent });
@@ -67,6 +80,11 @@ const dashboardRoutes = [
     roles: []
   },
   {
+    path: "/quan-ly/don-vi/danhsachsv/:id",
+    component: DanhSachSinhVien,
+    roles: []
+  },
+  {
     path: "/quan-ly/don-vi/:id",
     component: ChiTietDonVi,
     roles: []
@@ -84,6 +102,46 @@ const dashboardRoutes = [
   {
     path: "/quan-ly/nguoi-dung",
     component: DanhSachNguoiDung,
+    roles: []
+  },
+  {
+    path: "/quan-ly/ql-cap-bac/:id",
+    component: ChiTietCapBac,
+    roles: []
+  },
+  {
+    path: "/quan-ly/ql-cap-bac",
+    component: DanhSachCapBac,
+    roles: []
+  },
+  {
+    path: "/quan-ly/chuyen-nganh/:id",
+    component: ChiTietChuyenNganh,
+    roles: []
+  },
+  {
+    path: "/quan-ly/chuyen-nganh",
+    component: DanhSachChuyenNganh,
+    roles: []
+  },
+  {
+    path: "/quan-ly/bang-diem/:id",
+    component: ChiTietBangDiem,
+    roles: []
+  },
+  {
+    path: "/quan-ly/bang-diem",
+    component: DanhSachBangDiem,
+    roles: []
+  },
+  {
+    path: "/quan-ly/mon-hoc/:id",
+    component: ChiTietMonHoc,
+    roles: []
+  },
+  {
+    path: "/quan-ly/mon-hoc",
+    component: DanhSachMonHoc,
     roles: []
   },
   {

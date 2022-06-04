@@ -393,7 +393,7 @@ class DanhSach extends Component {
       return (
         <React.Fragment>
           <div className="main portlet fade-in">
-            <BreadCrumbs title={"Danh sách người dùng"} route={[{ label: 'Quản lý người dùng', value: '/quan-ly/nguoi-dung' }]} />
+            <BreadCrumbs title={"Danh sách giảng viên"} route={[{ label: 'Quản lý giảng viên', value: '/quan-ly/nguoi-dung' }]} />
             <div className="portlet-title">
               <div className="caption">
                 <i className="fas fa-grip-vertical" />Danh sách người dùng
@@ -419,7 +419,7 @@ class DanhSach extends Component {
                     <Select
                       className=""
                       classNamePrefix="form-control"
-                      placeholder="Đơn vị..."
+                      placeholder="Lớp..."
                       options={danhsachDonVi}
                       value={donviSelected}
                       isSearchable={true}
@@ -458,7 +458,7 @@ class DanhSach extends Component {
                         <th>Họ tên</th>
                         <th>Tài khoản</th>
                         <th>Email</th>
-                        <th>Đơn vị</th>
+                        <th>Cấp</th>
                         <th>Trạng thái</th>
                         {/* {checkSuperAdmin && <th>***</th>} */}
                         <th>Hành động</th>
@@ -474,7 +474,7 @@ class DanhSach extends Component {
                           <td>{item.name}</td>
                           <td>{item.account}</td>
                           <td>{item.email}</td>
-                          <td>{item.DonVi ? item.DonVi.Ten : ''}</td>
+                          <td>{item.CapBac ? item.CapBac.Ten : ''}</td>
                           <td>{item.KichHoat ? 'Kích hoạt' : 'Chưa kích hoạt'}</td>
                           {/* {checkSuperAdmin && <td><span style={{ color: 'red' }}>{item.isActive ? '' : 'Đã xóa'}</span></td>} */}
                           <td>
