@@ -31,6 +31,7 @@ const ChiTietCapBac = loadable({ loader: () => import('interface/screens/capbac/
 
 const DanhSachBangDiem = loadable({ loader: () => import('interface/screens/bangdiem/danhsach'), loading: LoadingComponent });
 const ChiTietBangDiem = loadable({ loader: () => import('interface/screens/bangdiem/chitiet'), loading: LoadingComponent });
+const DanhSachBangDiemSV = loadable({ loader: () => import('interface/screens/bangdiem/danhsachbd'), loading: LoadingComponent });
 
 const DanhSachMenu = loadable({ loader: () => import('interface/screens/menu/danhsach'), loading: LoadingComponent });
 const ChiTietMenu = loadable({ loader: () => import('interface/screens/menu/chitiet'), loading: LoadingComponent });
@@ -122,6 +123,11 @@ const dashboardRoutes = [
   {
     path: "/quan-ly/chuyen-nganh",
     component: DanhSachChuyenNganh,
+    roles: []
+  },
+  {
+    path: "/quan-ly/bang-diem/danh-sach/:id",
+    component: DanhSachBangDiemSV,
     roles: []
   },
   {

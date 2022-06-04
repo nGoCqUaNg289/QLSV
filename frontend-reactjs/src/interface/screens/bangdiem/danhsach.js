@@ -218,7 +218,7 @@ class DanhSach extends Component {
                         <BreadCrumbs title={"Bảng điểm sinh viên"} route={[{ label: 'Bảng điểm', value: '/bang-diem' }]} />
                         <div className="portlet-title">
                             <div className="caption">
-                                <i className="fas fa-grip-vertical" />Danh sách sinh viên
+                                <i className="fas fa-grip-vertical" />Danh sách bảng điểm sinh viên
                             </div>
                             <div className="action">
                                 <button onClick={() => this._handleExportExcel('dataTable')} className="btn btn-sm btn-outline-info border-radius" title="Xuất excel">
@@ -227,14 +227,14 @@ class DanhSach extends Component {
                             </div>
                         </div>
                         <div className="card">
-                            <div className="card-header">
+                            {/* <div className="card-header">
                                 <Link to={'/quan-ly/bang-diem/0'} className="btn btn-sm btn-outline-primary border-radius">
                                     <i className="fas fa-plus" />Thêm
                                 </Link>
                                 <button onClick={() => this._handleConfirmDelete(true, 0)} className="btn btn-sm btn-outline-danger border-radius">
                                     <i className="fas fa-trash" />Xóa
                                 </button>
-                            </div>
+                            </div> */}
                             <div className="card-body fix-first">
                                 <div className="table-fix-head">
                                     <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0" ref="dataTable">
@@ -258,10 +258,22 @@ class DanhSach extends Component {
                                                     <td>{item.name}</td>
                                                     {/* <td>{item.DonViCha ? item.DonViCha.Ten : ""}</td> */}
                                                     {/* <td>{item.SoDienThoai}</td> */}
-                                                    <td>{item.dtb}</td>
+                                                    <td>{item.dtb || 'Chưa có điểm trung bình'}</td>
                                                     <td>{item.KichHoat ? 'Kích hoạt' : ' '}</td>
                                                     <td>
-                                                        <Link to={'/quan-ly/bang-diem/' + item._id.$oid || item._id} title="Chi tiết" className="btn btn-sm btn-outline-info border-radius"><i className="fas fa-pencil-alt" /></Link>
+                                                        <Link
+                                                            to={{
+                                                                pathname:
+                                                                    "/quan-ly/bang-diem/danh-sach/" + item._id.$oid || item._id,
+                                                                state: { isReadOnly: true },
+                                                            }}
+                                                            title="Xem dữ liệu"
+                                                            className="btn btn-sm btn-outline-info border-radius mr-1"
+                                                        >
+                                                            <i className="fas fa-eye" />
+                                                        </Link>
+                                                        {/* <Link to={'/quan-ly/bang-diem/danh-sach/' + item._id.$oid || item._id} title="Chi tiết điểm" className="btn btn-sm btn-outline-info border-radius"><i className="fas fa-eye" /></Link> */}
+                                                        <Link to={'/quan-ly/bang-diem/' + item._id.$oid || item._id} title="Chỉnh sửa điểm" className="btn btn-sm btn-outline-info border-radius"><i className="fas fa-pencil-alt" /></Link>
                                                         <button onClick={() => this._handleConfirmDelete(false, item._id.$oid || item._id)} title="Xóa" className="btn btn-sm btn-outline-danger border-radius">
                                                             <i className="fas fa-trash" />
                                                         </button>

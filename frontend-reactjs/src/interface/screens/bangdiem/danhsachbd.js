@@ -283,8 +283,8 @@ class ChiTiet extends Component {
                                     <FormWrapper>
                                         <FormInput
                                             required={true}
-                                            disabled={false}
-                                            readOnly={false}
+                                            disabled={true}
+                                            readOnly={true}
                                             onChange={this._handleChangeElement}
                                             defaultValue={form.toan || ''}
                                             type="number"
@@ -296,8 +296,8 @@ class ChiTiet extends Component {
                                     <FormWrapper>
                                         <FormInput
                                             required={true}
-                                            disabled={false}
-                                            readOnly={false}
+                                            disabled={true}
+                                            readOnly={true}
                                             onChange={this._handleChangeElement}
                                             defaultValue={form.van || ''}
                                             type="number"
@@ -309,8 +309,8 @@ class ChiTiet extends Component {
                                     <FormWrapper>
                                         <FormInput
                                             required={true}
-                                            disabled={false}
-                                            readOnly={false}
+                                            disabled={true}
+                                            readOnly={true}
                                             onChange={this._handleChangeElement}
                                             defaultValue={form.anh || ''}
                                             type="number"
@@ -322,8 +322,8 @@ class ChiTiet extends Component {
                                     <FormWrapper>
                                         <FormInput
                                             required={true}
-                                            disabled={false}
-                                            readOnly={false}
+                                            disabled={true}
+                                            readOnly={true}
                                             onChange={this._handleChangeElement}
                                             defaultValue={form.hoa || ''}
                                             type="number"
@@ -335,8 +335,8 @@ class ChiTiet extends Component {
                                     <FormWrapper>
                                         <FormInput
                                             required={true}
-                                            disabled={false}
-                                            readOnly={false}
+                                            disabled={true}
+                                            readOnly={true}
                                             onChange={this._handleChangeElement}
                                             defaultValue={form.ly || ''}
                                             type="number"
@@ -348,8 +348,8 @@ class ChiTiet extends Component {
                                     <FormWrapper>
                                         <FormInput
                                             required={true}
-                                            disabled={false}
-                                            readOnly={false}
+                                            disabled={true}
+                                            readOnly={true}
                                             onChange={this._handleChangeElement}
                                             defaultValue={form.sinh || ''}
                                             type="number"

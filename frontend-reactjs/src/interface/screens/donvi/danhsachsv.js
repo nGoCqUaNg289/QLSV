@@ -461,14 +461,14 @@ class DanhSach extends Component {
                             </div>
                         </div>}
                         <div className="card">
-                            <div className="card-header">
+                            {/* <div className="card-header">
                                 <Link to={'/quan-ly/nguoi-dung/0'} className="btn btn-sm btn-outline-primary border-radius">
                                     <i className="fas fa-plus" />Thêm
                                 </Link>
                                 <button onClick={() => this._handleConfirmDelete(true, 0)} className="btn btn-sm btn-outline-danger border-radius">
                                     <i className="fas fa-trash" />Xóa
                                 </button>
-                            </div>
+                            </div> */}
                             <div className="card-body fix-first">
                                 <div className="table-fix-head">
                                     <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0" ref="dataTable">
@@ -497,7 +497,7 @@ class DanhSach extends Component {
                                                     <td>{item.CapBac ? item.CapBac.Ten : ''}</td>
                                                     <td>{item.KichHoat ? 'Kích hoạt' : 'Chưa kích hoạt'}</td>
                                                     <td>
-                                                        <Link to={'/quan-ly/bang-diem/' + item._id.$oid || item._id} title="Xem bảng điểm" className="btn btn-sm btn-outline-info border-radius"> <i className="fas fa-eye" /></Link>
+                                                        <Link to={'/quan-ly/bang-diem/danh-sach/' + item._id.$oid || item._id} title="Xem bảng điểm" className="btn btn-sm btn-outline-info border-radius"> <i className="fas fa-eye" /></Link>
                                                         {/* <button onClick={() => this._handleConfirmApprove(item._id.$oid || item._id, item)} title="Xem bảng điểm" className="btn btn-sm btn-outline-success border-radius" style={{ display: item.KichHoat ? 'none' : 'inline' }}>
                                                             <i className="fas fa-user-check"></i>
                                                         </button> */}

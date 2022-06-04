@@ -458,7 +458,7 @@ class DanhSach extends Component {
                         <th>Họ tên</th>
                         <th>Tài khoản</th>
                         <th>Email</th>
-                        <th>Cấp</th>
+                        <th>Phân loại</th>
                         <th>Trạng thái</th>
                         {/* {checkSuperAdmin && <th>***</th>} */}
                         <th>Hành động</th>
