@@ -247,7 +247,7 @@ class DanhSach extends Component {
                           <td className='text-center'>{index + 1}</td>
                           <td>{item.Ten}</td>
                           {/* <td>{item.DonViCha ? item.DonViCha.Ten : ""}</td> */}
-                          <td>{item.DiaChi}</td>
+                          <td>{item.ChuyenNganh}</td>
                           <td>{item.ChuNhiem}</td>
                           {/* <td></td> */}
                           <td>{item.KichHoat ? 'Kích hoạt' : ' '}</td>

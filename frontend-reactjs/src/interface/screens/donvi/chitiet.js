@@ -47,7 +47,7 @@ class ChiTiet extends Component {
       let data = await tbDonVi.getById(id);
       if (data) {
         this.state.form = data;
-        this.state.donviSelected = cmFunction.convertSelectedOptions(data.DonViCha, '_id.$oid', 'Ten');
+        // this.state.donviSelected = cmFunction.convertSelectedOptions(data.ChuyenNganh, '_id.$oid', 'Ten');
       }
       if (!data) this.state.error = true;
       this.forceUpdate();
@@ -77,7 +77,7 @@ class ChiTiet extends Component {
       filter.filter = JSON.stringify({ Ten: cmFunction.regexText(inputValue), KichHoat: true });
       // filter.filter.CapBac.Ten = 'Giảng viên'
       filter = new URLSearchParams(filter).toString();
-      let dsDonVi = await tbDonVi.getAll(filter);
+      let dsDonVi = await tbChuyenNganh.getAll(filter);
       dsDonVi = dsDonVi && dsDonVi._embedded ? dsDonVi._embedded : [];
       let id = this.props.match.params.id;
       let find = dsDonVi.find(ele => ele._id.$oid == id);
@@ -95,8 +95,8 @@ class ChiTiet extends Component {
   };
 
   _handleLoadGVOptions = (inputValue, callback) => {
-    clearTimeout(this.state.searchTimeout);
-    this.state.searchTimeout = setTimeout(async () => {
+    clearTimeout(this.state.searchGVTimeout);
+    this.state.searchGVTimeout = setTimeout(async () => {
       let filter = {};
       filter.page = 1;
       filter.pagesize = 1000;
@@ -206,15 +206,17 @@ class ChiTiet extends Component {
     axiosReq.DonViCha = null;
     axiosReq.Cap = 0;
     axiosReq.ChuNhiem = giangvienSelected.name;
-    if (donviSelected) {
-      let dvTmp = cmFunction.clone(donviSelected)
-      delete dvTmp.DonViCha
-      axiosReq.DonViCha = dvTmp;
-      axiosReq.Cap = (dvTmp.Cap + 1)
-      delete axiosReq.DonViCha.value;
-      delete axiosReq.DonViCha.label;
-    }
-    console.log(axiosReq);
+    axiosReq.ChuyenNganh = donviSelected.Ten;
+    // console.log(donviSelected);
+    // if (donviSelected) {
+    //   let dvTmp = cmFunction.clone(donviSelected)
+    //   delete dvTmp.DonViCha
+    //   axiosReq.DonViCha = dvTmp;
+    //   axiosReq.Cap = (dvTmp.Cap + 1)
+    //   delete axiosReq.DonViCha.value;
+    //   delete axiosReq.DonViCha.label;
+    // }
+    // console.log(axiosReq);
     let axiosRes;
     if (isInsert) {
       axiosRes = await tbDonVi.create(axiosReq);
@@ -326,9 +328,7 @@ class ChiTiet extends Component {
                 <div className="form-body" ref="form">
                   <FormWrapper>
                     <FormInput
-                      parentClass="col-md-6"
-                      labelClass="col-md-6"
-                      inputClass="col-md-6"
+
                       required={true}
                       disabled={false}
                       readOnly={false}
@@ -339,7 +339,7 @@ class ChiTiet extends Component {
                       label="Tên lớp"
                       placeholder="Nhập tên lớp học"
                     />
-                    <FormInput
+                    {/* <FormInput
                       parentClass="col-md-6"
                       labelClass="col-md-6"
                       inputClass="col-md-6"
@@ -351,7 +351,7 @@ class ChiTiet extends Component {
                       type="text"
                       id="Ma"
                       label="Khóa học"
-                    />
+                    /> */}
                   </FormWrapper>
                   <FormWrapper>
                     <FormInput
@@ -369,7 +369,7 @@ class ChiTiet extends Component {
                     />
                   </FormWrapper>
                   <FormWrapper>
-                    <FormInput
+                    {/* <FormInput
                       required={false}
                       disabled={false}
                       readOnly={false}
@@ -379,6 +379,19 @@ class ChiTiet extends Component {
                       id="DiaChi"
                       label="Chuyên ngành"
                       placeholder="Nhập chuyên ngành đào tạo"
+                    /> */}
+                    <FormInput
+                      loadOptions={this._handleLoadOptions}
+                      onChange={this._handleDonViChange}
+                      required={false}
+                      defaultValue={donviSelected}
+                      isDisabled={false}
+                      isClearable={true}
+                      isSearchable={true}
+                      defaultOptions={true}
+                      type="select"
+                      label="Chuyên ngành"
+                      placeholder="Chọn chuyên ngành ..."
                     />
                   </FormWrapper>
                   {/* <FormWrapper>
