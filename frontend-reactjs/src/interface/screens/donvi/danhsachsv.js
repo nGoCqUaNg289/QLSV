@@ -30,6 +30,9 @@ class DanhSach extends Component {
             cbCheckAll: false,
             searchIsOpen: false,
             tenLop: '',
+            svg: 0,
+            svk: 0,
+            svtb: 0,
             page: CONSTANTS.DEFAULT_PAGE,
             pagesize: CONSTANTS.DEFAULT_PAGESIZE,
             _size: 0,
@@ -102,20 +105,24 @@ class DanhSach extends Component {
     _getDanhSachNguoiDung = async (query) => {
         let dataUser = await tbUsers.getAll(query);
         let dataSV = await dataUser._embedded
-        // console.log(dataSV);
         for (let index = 0; index < dataSV.length; index++) {
-            // console.log(dataSV[index]);
             if (dataSV[index].CapBac.Ten == 'Sinh viên' && dataSV[index].Lop.Ten == this.state.tenLop) {
-                // let data = [];
-                // data.push(dataSV[index]);
                 this.state.danhsach.push(dataSV[index]);
-                // this.state.danhsach = this.state.danhsach && this.state.danhsach._embedded ? this.state.danhsach._embedded : [];
-                // this.state._size = this.state.danhsach._size || 0
-                // this.state._total_pages = this.state.danhsach._total_pages || 0
-                // this.state.cbCheckAll = false
-                // console.log(this.state.danhsach);
+            }
+            if (dataSV[index].CapBac.Ten == 'Sinh viên' && dataSV[index].Lop.Ten == this.state.tenLop && dataSV[index].dtb >= 8) {
+                this.state.svg++;
+            } else if (dataSV[index].CapBac.Ten == 'Sinh viên' && dataSV[index].Lop.Ten == this.state.tenLop && dataSV[index].dtb < 8 && dataSV[index].dtb >= 6.5) {
+                this.state.svk++;
+            } else if (dataSV[index].CapBac.Ten == 'Sinh viên' && dataSV[index].Lop.Ten == this.state.tenLop && dataSV[index].dtb < 6.5) {
+                this.state.svtb++;
             }
         }
+
+        console.log('svg : ' + this.state.svg);
+
+        console.log('svk : ' + this.state.svk);
+
+        console.log('svtb : ' + this.state.svtb);
 
         this.forceUpdate()
     }
@@ -328,41 +335,6 @@ class DanhSach extends Component {
         return new URLSearchParams(parsed).toString()
     }
 
-    // EXPORT EXCEL
-    // _handleExportExcel = (ref) => {
-
-    //   // ví dụ xuất excel tại bảng đang có
-    //   let myRows = [['Danh sách quản lý người dùng']], maxCol = 0
-    //   let table = ReactDOM.findDOMNode(this.refs[`${ref}`]);
-    //   let filter = this.state.filter
-    //   for (let tbindex = 0; tbindex < table.children.length; tbindex++) {
-    //     let tb = table.children[`${tbindex}`]
-    //     for (let trindex = 0; trindex < tb.children.length; trindex++) {
-    //       let row = []
-    //       let tr = tb.children[`${trindex}`]
-    //       maxCol = tr.children.length > maxCol ? tr.children.length : maxCol
-    //       for (let thindex = 0; thindex < tr.children.length; thindex++) {
-    //         let th = tr.children[`${thindex}`]
-    //         row.push(th.innerText)
-    //       }
-    //       myRows.push(row)
-    //     }
-    //   }
-    //   // set colspan và rowspan
-    //   let merge = [
-    //     // { s: { r: 0, c: 0 }, e: { r: 0, c: maxCol } },
-    //     // { s: { r: 1, c: 6 }, e: { r: 1, c: 7 } }
-    //   ]
-    //   // xuất file
-    //   let ws = XLSX.utils.aoa_to_sheet(myRows);
-    //   ws["!merges"] = merge;
-    //   let wb = XLSX.utils.book_new();
-    //   //add thêm nhiều Sheet vào đây cũng đc
-    //   XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-    //   let date = cmFunction.timestamp2DateString(moment().valueOf())
-    //   let name = 'DSQuanLyNguoiDung_' + this.state.page + '_' + date
-    //   XLSX.writeFile(wb, name + ".xlsx")
-    // }
     _handleExportExcel = (ref) => {
         // ví dụ xuất excel tại bảng đang có
         let myRows = [], maxCol = 0
@@ -410,7 +382,7 @@ class DanhSach extends Component {
     }
 
     render() {
-        let { danhsach, cbCheckAll, danhsachDonVi, donviSelected, search, searchToggle } = this.state
+        let { danhsach, cbCheckAll, danhsachDonVi, donviSelected, search, searchToggle, svg, svk, svtb } = this.state
         let { page, pagesize, _size, _total_pages } = this.state
         let { LoginRes } = this.props
         let checkSuperAdmin = LoginRes.roles === SUPER.roles
@@ -461,14 +433,15 @@ class DanhSach extends Component {
                             </div>
                         </div>}
                         <div className="card">
-                            {/* <div className="card-header">
-                                <Link to={'/quan-ly/nguoi-dung/0'} className="btn btn-sm btn-outline-primary border-radius">
-                                    <i className="fas fa-plus" />Thêm
-                                </Link>
-                                <button onClick={() => this._handleConfirmDelete(true, 0)} className="btn btn-sm btn-outline-danger border-radius">
-                                    <i className="fas fa-trash" />Xóa
-                                </button>
-                            </div> */}
+                            <div>
+                                Tổng số sv giỏi: {svg}
+                            </div>
+                            <div>
+                                Tổng số sv khá: {svk}
+                            </div>
+                            <div>
+                                Tổng số sv trung bình: {svtb}
+                            </div>
                             <div className="card-body fix-first">
                                 <div className="table-fix-head">
                                     <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0" ref="dataTable">
@@ -477,9 +450,9 @@ class DanhSach extends Component {
                                                 <th className='td-checkbox'><input type="checkbox" id='cbCheckAll' checked={cbCheckAll} onChange={this._handleCheckAll} /></th>
                                                 <th>STT</th>
                                                 <th>Họ tên</th>
-                                                <th>Tài khoản</th>
+                                                {/* <th>Tài khoản</th> */}
                                                 <th>Email</th>
-                                                <th>Cấp</th>
+                                                <th>Điểm trung bình</th>
                                                 <th>Trạng thái</th>
                                                 <th>Hành động</th>
                                             </tr>
@@ -492,10 +465,10 @@ class DanhSach extends Component {
                                                     </td>
                                                     <td className='text-center'>{index + 1}</td>
                                                     <td>{item.name}</td>
-                                                    <td>{item.account}</td>
+                                                    {/* <td>{item.account}</td> */}
                                                     <td>{item.email}</td>
-                                                    <td>{item.CapBac ? item.CapBac.Ten : ''}</td>
-                                                    <td>{item.KichHoat ? 'Kích hoạt' : 'Chưa kích hoạt'}</td>
+                                                    <td>{item.dtb}</td>
+                                                    <td>{item.KichHoat ? 'Đang học' : 'Tạm dừng'}</td>
                                                     <td>
                                                         <Link to={'/quan-ly/bang-diem/danh-sach/' + item._id.$oid || item._id} title="Xem bảng điểm" className="btn btn-sm btn-outline-info border-radius"> <i className="fas fa-eye" /></Link>
                                                         {/* <button onClick={() => this._handleConfirmApprove(item._id.$oid || item._id, item)} title="Xem bảng điểm" className="btn btn-sm btn-outline-success border-radius" style={{ display: item.KichHoat ? 'none' : 'inline' }}>
@@ -503,10 +476,10 @@ class DanhSach extends Component {
                                                         </button> */}
                                                         {/* <button onClick={() => this._handleConfirmUnapprove(item._id.$oid || item._id, item)} title="Bỏ phê duyệt tài khoản" className="btn btn-sm btn-outline-primary border-radius" style={{ display: item.KichHoat ? 'inline' : 'none' }}>
                                                             <i className="fas fa-ban"></i>
-                                                        </button>
+                                                        </button> */}
                                                         <button onClick={() => this._handleConfirmDelete(false, item._id.$oid || item._id)} title="Xóa" className="btn btn-sm btn-outline-danger border-radius">
                                                             <i className="fas fa-trash" />
-                                                        </button> */}
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             })}

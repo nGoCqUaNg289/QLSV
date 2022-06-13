@@ -364,7 +364,7 @@ class ChiTiet extends Component {
                                             disabled={true}
                                             readOnly={true}
                                             onChange={this._handleChangeElement}
-                                            defaultValue={form.dtb = ((parseInt(form.sinh) + parseInt(form.toan) + parseInt(form.van) + parseInt(form.anh) + parseInt(form.ly) + parseInt(form.hoa)) / 7).toFixed(2) || ''}
+                                            defaultValue={form.dtb = ((parseInt(form.sinh) + parseInt(form.toan) + parseInt(form.van) + parseInt(form.anh) + parseInt(form.ly) + parseInt(form.hoa)) / 6).toFixed(2) || ''}
                                             type="number"
                                             id="dtb"
                                             label="Điểm trung bình"
